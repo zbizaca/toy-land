@@ -6,6 +6,6 @@ package org.zbizaca.electric
 case class Link(n1:Node,n2:Node,initialConductivity:Double) {
   var conductivity:Double = initialConductivity
 
-  n1.addLink(this)
-  n2.addLink(this)
+  n1.addLink(this,initialConductivity)
+  n2.addLink(this,initialConductivity)
 }
