@@ -10,14 +10,14 @@ class RingBufferSpec extends Specification {
 
     "start empty" >> {
       val rb = new RingBuffer[Int](3)
-      rb.size must_== 0
+      rb.length must_== 0
     }
 
     "retain stored elements" >> {
       val rb = new RingBuffer[Int](3)
       rb.insert(1)
       rb.insert(1)
-      rb.size must_== 2
+      rb.length must_== 2
     }
 
     "fill up to capacity" >> {
@@ -25,7 +25,7 @@ class RingBufferSpec extends Specification {
       rb.insert(1)
       rb.insert(2)
       rb.insert(3)
-      rb.size must_== 3
+      rb.length must_== 3
 
     }
 
@@ -35,7 +35,7 @@ class RingBufferSpec extends Specification {
       rb.insert(2)
       rb.insert(3)
       rb.insert(4)
-      rb.size must_== 3
+      rb.length must_== 3
 
     }
 
@@ -45,7 +45,7 @@ class RingBufferSpec extends Specification {
       rb.insert(2)
       rb.insert(3)
 
-      rb.buffer.toList must_== List(1, 2, 3)
+      rb.toList must_== List(1, 2, 3)
 
     }
 
@@ -56,7 +56,7 @@ class RingBufferSpec extends Specification {
       rb.insert(3)
       rb.insert(4)
 
-      rb.buffer.toList must_== List(2, 3, 4)
+      rb.toList must_== List(2, 3, 4)
 
     }
   }

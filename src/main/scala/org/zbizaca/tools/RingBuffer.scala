@@ -1,5 +1,7 @@
 package org.zbizaca.tools
 
+import scala.collection.mutable.ListBuffer
+
 
 /**
   * Created by zbizaca on 11/12/16.
@@ -7,52 +9,45 @@ package org.zbizaca.tools
 case class RingBuffer[T: Manifest](capacity: Int) extends Iterable[T] {
   val buffer: Array[T] = new Array[T](capacity)
   var first = 0
-  var next = 0
+  var length = 0
 
   def insert(t: T) = {
-    buffer(next) = t
+    buffer((first + length) % capacity) = t
     incrementNext
   }
 
   private def incrementNext = {
-    next = next + 1
-    if (next >= capacity)
-      next = 0
-
-    if (first == next) {
-      first = next + 1
-      if (first >= capacity)
+    if (length == capacity) {
+      first = first + 1
+      if (first == capacity)
         first = 0
-    }
+    } else
+      length = length + 1
   }
 
-  override def size:Int = {
-    if(next >= first)
-      next - first
-    else
-      capacity
+  override def size = length
+
+  override def toList: List[T] = {
+    val builder = new ListBuffer[T]()
+    foreach(t => builder.append(t))
+    builder.toList
   }
 
 
   class RingBufferIterator[T](buffer: RingBuffer[T]) extends Iterator[T] {
 
-    var position = buffer.first - 1
+    var position = buffer.first
+    val last = position + buffer.length
 
-    override def hasNext: Boolean = {
-      if (buffer.next >= buffer.first)
-        position < buffer.next
-      else
-        position >= buffer.first ||
-          position < buffer.next
-    }
+    override def hasNext: Boolean = position < last
+
 
     override def next(): T = {
-      if (position == buffer.capacity - 1)
-        position = 0
-      else
-        position = position + 1
+      val current = position % buffer.capacity
 
-      buffer.buffer(position)
+      position = position + 1
+
+      buffer.buffer(current)
     }
   }
 
