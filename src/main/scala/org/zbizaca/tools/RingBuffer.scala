@@ -13,10 +13,10 @@ case class RingBuffer[T: Manifest](capacity: Int) extends Iterable[T] {
 
   def insert(t: T) = {
     buffer((first + length) % capacity) = t
-    incrementNext
+    incrementNext()
   }
 
-  private def incrementNext = {
+  private def incrementNext() = {
     if (length == capacity) {
       first = first + 1
       if (first == capacity)
@@ -34,7 +34,7 @@ case class RingBuffer[T: Manifest](capacity: Int) extends Iterable[T] {
   }
 
 
-  class RingBufferIterator[T](buffer: RingBuffer[T]) extends Iterator[T] {
+  class ForwardIterator[T](buffer: RingBuffer[T]) extends Iterator[T] {
 
     var position = buffer.first
     val last = position + buffer.length
@@ -44,14 +44,33 @@ case class RingBuffer[T: Manifest](capacity: Int) extends Iterable[T] {
 
     override def next(): T = {
       val current = position % buffer.capacity
-
       position = position + 1
-
       buffer.buffer(current)
     }
   }
 
-  override def iterator: Iterator[T] = new RingBufferIterator[T](this)
+
+  class BackwardIteraot[T](buffer: RingBuffer[T]) extends Iterator[T] {
+
+    var position = buffer.first + buffer.length - 1
+
+
+    override def hasNext: Boolean = position >= buffer.first
+
+    override def next(): T = {
+      val current = position % buffer.capacity
+      position = position - 1
+      buffer.buffer(current)
+    }
+  }
+
+  override def iterator: Iterator[T] = new BackwardIteraot[T](this)
+
+  def forwardIterator: Iterator[T] = new ForwardIterator[T](this)
+
+  def backwardIterator: Iterator[T] = new BackwardIteraot[T](this)
+
+
 }
 
 

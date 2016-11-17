@@ -45,7 +45,7 @@ class RingBufferSpec extends Specification {
       rb.insert(2)
       rb.insert(3)
 
-      rb.toList must_== List(1, 2, 3)
+      rb.toList must_== List(3, 2, 1)
 
     }
 
@@ -55,8 +55,9 @@ class RingBufferSpec extends Specification {
       rb.insert(2)
       rb.insert(3)
       rb.insert(4)
+      rb.insert(5)
 
-      rb.toList must_== List(2, 3, 4)
+      rb.toList must_== List(5, 4, 3)
 
     }
   }
