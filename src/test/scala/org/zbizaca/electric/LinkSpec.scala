@@ -11,8 +11,8 @@ class LinkSpec extends Specification {
 
     "Connect Links and Nodes" >> {
 
-      val n1 = new Node
-      val n2 = new Node
+      val n1 = new Node(5)
+      val n2 = new Node(5)
       val link = new Link(n1, n2, 1.0)
 
       link.n1 must_== n1
@@ -23,8 +23,8 @@ class LinkSpec extends Specification {
 
     "Propage energy through the link" >> {
 
-      val n1 = new Node
-      val n2 = new Node
+      val n1 = new Node(3)
+      val n2 = new Node(3)
       val link = new Link(n1, n2, 1.0)
 
       1 must_== 1
