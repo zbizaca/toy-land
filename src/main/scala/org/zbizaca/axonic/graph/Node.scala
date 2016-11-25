@@ -1,8 +1,7 @@
-package org.zbizaca.electric
+package org.zbizaca.axonic.graph
 
-import org.zbizaca.axonic.tools.{Color, RingBuffer}
+import org.zbizaca.axonic.tools.RingBuffer
 
-import scala.collection.mutable
 import scala.collection.mutable._
 
 /**

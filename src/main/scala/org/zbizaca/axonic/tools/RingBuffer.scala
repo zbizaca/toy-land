@@ -1,4 +1,4 @@
-package org.zbizaca.tools
+package org.zbizaca.axonic.tools
 
 import scala.collection.mutable.ListBuffer
 

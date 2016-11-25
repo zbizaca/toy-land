@@ -1,4 +1,4 @@
-package org.zbizaca.electric
+package org.zbizaca.axonic.graph
 
 import org.zbizaca.axonic.tools.Color
 
