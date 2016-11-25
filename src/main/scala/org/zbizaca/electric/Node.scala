@@ -1,6 +1,6 @@
 package org.zbizaca.electric
 
-import org.zbizaca.tools.RingBuffer
+import org.zbizaca.tools.{Color, RingBuffer}
 
 import scala.collection.mutable._
 
@@ -9,17 +9,23 @@ import scala.collection.mutable._
   */
 class Node(memoryCapacity: Int) {
 
-  val values = new RingBuffer[(Int, Double)](memoryCapacity)
+  val results = new RingBuffer[Result](memoryCapacity)
 
-  val links: Map[Link, Long] = Map.empty
+  val links: Map[Long, LinkConnector] = Map.empty
 
-  def addLink(link: Link, linkType: Long) = {
-    links += (link -> linkType)
+  def addLink(linkId: Long, linkConnector: LinkConnector): Unit = {
+    links += (linkId -> linkConnector)
   }
 
-  def addPotetntial(color:Long,value:Double) = {
+  def addResult(result: Result): List[Long] = {
+    results.find(r => r == result) match {
+      case _ : Some[Result] => List()
+      case _ =>
+        results.insert(result)
+        List()
+    }
   }
 
-  def getValue(color:Int):Option[(Int,Double)] =
-    values.find(_._1 == color)
+  def getValue(color: Long): Option[Result] =
+    results.find(_.color == color)
 }

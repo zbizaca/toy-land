@@ -10,6 +10,4 @@ case class Link(
                  initialConductivity: Double = 1.0) {
   var conductivity: Double = initialConductivity
 
-  n1.addLink(this, linkType)
-  n2.addLink(this, linkType)
 }

@@ -8,13 +8,30 @@ package org.zbizaca.electric
   */
 trait Network {
 
-  def addNode(node: Node): Long
+  def addPotential(nodeId: Long, potential:Result) = {
+    getNode(nodeId).map { node =>
+      node.addResult(potential)
+    }
+  }
 
-  def addLink(nodeId1: Long,
-              nodeId2: Long,
-              capacity: Double,
-              connectivity1: Double,
-              connectivity2: Double)
+  protected def getNode(modeId: Long): Option[Node] = None
 
-  def readNode(nodeId:Long):Double
+  protected def processLink(linkId: Long, potential: Result)
+}
+
+
+case class StaticNetwork(
+                          nodes: scala.collection.mutable.Map[Long, Node],
+                          links: scala.collection.mutable.Map[Long, Link],
+                          modifiedLinks: collection.mutable.Stack[Long],
+                          modifiedNodes: collection.mutable.Stack[Long],
+                          nodeCapacity: Int
+                        ) extends Network {
+
+  override protected def getNode(nodeId: Long): Option[Node] =
+    nodes.get(nodeId)
+
+  override protected def processLink(linkId: Long, potential: Result): Unit = {
+
+  }
 }

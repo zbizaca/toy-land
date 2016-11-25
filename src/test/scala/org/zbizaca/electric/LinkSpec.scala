@@ -7,28 +7,28 @@ import org.specs2.mutable.Specification
   */
 class LinkSpec extends Specification {
 
-  "Build wireing from Nodes and Links" should {
+//  "Build wireing from Nodes and Links" should {
 
-    "Connect Links and Nodes" >> {
+//    "Connect Links and Nodes" >> {
+//
+//      val n1 = new Node(5)
+//      val n2 = new Node(5)
+//      val link = new Link(n1, n2, 13)
+//
+//      link.n1 must_== n1
+//      link.n2 must_== n2
+//      n1.links.isDefinedAt(link) must beTrue
+//      n2.links.isDefinedAt(link) must beTrue
+//    }
 
-      val n1 = new Node(5)
-      val n2 = new Node(5)
-      val link = new Link(n1, n2, 13)
-
-      link.n1 must_== n1
-      link.n2 must_== n2
-      n1.links.isDefinedAt(link) must beTrue
-      n2.links.isDefinedAt(link) must beTrue
-    }
-
-    "Propage energy through the link" >> {
-
-      val n1 = new Node(3)
-      val n2 = new Node(3)
-      val link = new Link(n1, n2, 435)
-
-      1 must_== 1
-    }
-  }
+//    "Propage energy through the link" >> {
+//
+//      val n1 = new Node(3)
+//      val n2 = new Node(3)
+//      val link = new Link(n1, n2, 435)
+//
+//      1 must_== 1
+//    }
+//  }
 
 }
